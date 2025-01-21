@@ -60,11 +60,10 @@ def print_test_page_with_cut(printer_name):
         job_id = conn.printFile(printer_name, temp_file_path, "Test Page with Cut", {})
         print(f"Test page sent to printer '{printer_name}' with job ID {job_id}")
 
-        # Give the printer some time to process the print job (2 seconds)
-        time.sleep(2)
+   
 
         # Send the cut command to the printer (GS V command for cutting)
-        cut_command = b"\x1d\x56"  # GS V cut command for Epson printers
+        cut_command = b"\x1d\x56\x01"  # GS V cut command for Epson printers
         cut_temp_file_path = "/tmp/cut_command.raw"
         with open(cut_temp_file_path, "wb") as cut_file:
             cut_file.write(cut_command)
